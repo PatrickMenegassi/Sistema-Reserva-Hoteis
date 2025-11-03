@@ -1,0 +1,5 @@
+from .reservation_serializers import ReservationSerializer
+from .room_serializers import RoomSerializer
+from .user_serializers import UserSerializer, UserRegistrationSerializer
+from .auth_serializers import CustomTokenObtainPairSerializer
+from .serializers import HotelSerializer, ReservaSerializer
