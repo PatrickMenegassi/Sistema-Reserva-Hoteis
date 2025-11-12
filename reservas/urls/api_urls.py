@@ -1,8 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from reservas.views import UserViewSet, RoomViewSet, ReservationViewSet, register, login, logout
+from reservas.views.api import UserViewSet, RoomViewSet, ReservationViewSet, register, login, logout
 
-# Funciona para quando se necessita de um CRUD completo
+# Funciona para quando se necessita de um CRUD completo, servem apenas para as API
 router = DefaultRouter()
 router.register('users', UserViewSet)
 router.register('rooms', RoomViewSet)

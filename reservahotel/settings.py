@@ -47,6 +47,11 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',  # ✅ Navegador
+        'rest_framework.authentication.TokenAuthentication',    # ✅ API
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',  # Se usar JWT
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ]
@@ -61,7 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'reservas.middleware.DisableCSRFMiddleware',
-    'reservas.middleware.JWTAuthenticationMiddleware',
+    #'reservas.middleware.JWTAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'reservahotel.urls'
@@ -69,7 +74,7 @@ ROOT_URLCONF = 'reservahotel.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +85,9 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGIN_REDIRECT_URL = '/init_page/'  # Vai para pagina inical após login, autenticação é feita pelo Django
+LOGOUT_REDIRECT_URL = '/accounts/login/'  # Volta para login após logout
 
 WSGI_APPLICATION = 'reservahotel.wsgi.application'
 
@@ -175,9 +183,9 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(hour=0, minute=0),
     },
     #PARA TESTE - executa a cada 2 minutos
-    'teste-celery-beat': {
-        'task': 'reservas.tasks.task_teste_agendamento',
-        'schedule': crontab(minute='*/2'),  # A cada 2 minutos
-    },
+    #'teste-celery-beat': {
+    #    'task': 'reservas.tasks.task_teste_agendamento',
+    #    'schedule': crontab(minute='*/2'),  # A cada 2 minutos
+    #},
     
 }

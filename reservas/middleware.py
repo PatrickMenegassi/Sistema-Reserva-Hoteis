@@ -1,6 +1,7 @@
 import jwt
 from django.conf import settings
 from .models.user import Usuario
+from django.contrib.auth.models import AnonymousUser
 
 class JWTAuthenticationMiddleware:
     def __init__(self, get_response):
@@ -11,6 +12,9 @@ class JWTAuthenticationMiddleware:
             # Não faz nada para o Admin - usa autenticação padrão do Django
             response = self.get_response(request)
             return response
+        if not hasattr(request, 'user') or request.user is None:
+            request.user = AnonymousUser()
+
         auth_header = request.META.get('HTTP_AUTHORIZATION', '')
         
         print(f"Header: {auth_header}")

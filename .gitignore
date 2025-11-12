@@ -31,3 +31,6 @@ celery_logs/
 
 # Backups
 backups/
+
+# Celery
+*.schedule
