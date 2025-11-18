@@ -1,25 +1,48 @@
-# 🏨 Sistema de Reserva de Hotéis
+🏨 Hotel Booking System
 
-Sistema de gerenciamento de reservas de hotéis com Django, Django REST Framework e Celery.
+A complete hotel room booking and management platform built with Django, Django REST Framework, Celery, and Docker.
+This system provides REST APIs for reservations, room availability, user authentication, and automated tasks such as email notifications.
 
-## 🚀 Funcionalidades
+✨ Features
+🛏️ Booking & Reservations
+- Create, update, and cancel room reservations
+- Check room availability
+- Overlapping booking prevention
+- Reservation history per user
 
-- Reservas de quartos
-- API REST
-- Autenticação JWT
-- Emails automáticos com Celery
-- Docker
+🔐 Authentication & Authorization
+- JWT authentication
+- Protected endpoints for customers and administrators
+- User registration and login
 
-## 🛠️ Tecnologias
+🌐 REST API
+- Endpoints built with Django REST Framework
+- Pagination, filtering, and serialization
+- Validation of room capacity and dates
 
-- Django 4.2
-- Django REST Framework
-- Celery
-- Redis
-- Docker
+📧 Background Tasks
+- Automated confirmation emails using Celery
+- Celery workers + Redis as message broker
+- Asynchronous reservation processing
 
-## 📦 Instalação
+🐳 Docker Support
+- Fully containerized application
+- Docker Compose for local development
+- Containers: Django API, Redis, Celery Worker, Celery Beat
 
-### Desenvolvimento
-```bash
-docker compose up --build
+🚀 Quick Start
+
+# Clone the repository
+git clone https://github.com/PatrickMenegassi/Sistema-Reserva-Hoteis.git
+
+# Run with Docker
+docker-compose up --build
+
+📡 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register/` | User registration |
+| POST | `/api/auth/login/` | User login |
+| GET | `/api/rooms/` | List available rooms |
+| POST | `/api/reservations/` | Create reservation |
